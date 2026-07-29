@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Undangan Pernikahan Digital Isabella Aurelia Wijaya & Alexander Rayhan Pratama. Sabtu, 24 Oktober 2026.">
+    <meta name="keywords" content="Undangan Pernikahan, Digital Wedding Invitation, Isabella, Alexander, Wedding">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="Kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri hari bahagia kami.">
+    <meta property="og:image" content="assets/images/couple_hero.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💍</text></svg>">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind CSS (via CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ivory: '#FAF7F2',
+                        cream: '#F4EFE6',
+                        gold: {
+                            DEFAULT: '#D4AF37',
+                            light: '#E6C687',
+                            dark: '#A88420'
+                        },
+                        emerald: {
+                            DEFAULT: '#00674f',
+                            dark: '#004d3a'
+                        },
+                        brown: '#6E5A44',
+                        rose: '#E8D5D0',
+                        blush: '#F5E6E0'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        script: ['"Great Vibes"', '"Alex Brush"', 'cursive'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s ease-in-out infinite',
+                        'shimmer': 'shimmer 2s linear infinite',
+                        'slide-up': 'slideUp 0.6s ease-out forwards',
+                        'scale-in': 'scaleIn 0.5s ease-out forwards'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% center' },
+                            '100%': { backgroundPosition: '200% center' }
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        scaleIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.9)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lenis CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.18/dist/lenis.min.css">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+    <!-- Fancybox CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-ivory text-stone-800 font-sans antialiased overflow-x-hidden">
+
+    <!-- ============================================================ -->
+    <!-- FLOATING AUDIO TOGGLE - Modern Minimalist -->
+    <!-- ============================================================ -->
+    <div class="fixed bottom-6 left-6 z-[999] flex items-center gap-3">
+        <button id="music-toggle-btn" aria-label="Toggle Music" 
+                class="w-14 h-14 rounded-full bg-emerald text-gold border-2 border-gold/40 shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-gold/30 group">
+            <i id="music-icon" class="fa-solid fa-compact-disc text-2xl spin-slow group-hover:text-gold-light transition-colors"></i>
+        </button>
+        <span class="text-xs text-stone-400 font-sans hidden sm:block">Music</span>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- DESKTOP LEFT PREVIEW PANEL -->
+    <!-- ============================================================ -->
+    <div id="preview-panel" class="hidden xl:flex fixed left-0 top-0 w-[60%] h-screen z-20 flex-col items-center justify-center bg-emerald-dark text-white overflow-hidden select-none">
+        <div class="absolute inset-0 z-0 overflow-hidden">
+            <img src="assets/images/couple_hero.jpg" alt="Wedding Preview" class="w-full h-full object-cover object-center transform scale-105 filter brightness-40">
+            <div class="absolute inset-0 bg-gradient-to-t from-emerald-dark via-emerald-dark/60 to-emerald-dark/30"></div>
+            <div class="absolute inset-0 bg-floral-pattern opacity-10"></div>
+        </div>
+
+        <div id="preview-petals-container" class="absolute inset-0 pointer-events-none z-10 overflow-hidden"></div>
+
+        <div class="relative z-20 text-center px-12 max-w-xl">
+            <div class="inline-flex items-center justify-center mb-6">
+                <span class="text-xs font-sans tracking-[0.3em] text-gold uppercase font-semibold px-4 py-1.5 border-y border-gold/40">
+                    The Wedding Invitation
+                </span>
+            </div>
+
+            <h1 class="font-script text-7xl sm:text-8xl text-gold-gradient mb-4 tracking-wide leading-tight">
+                Isabella & Alexander
+            </h1>
+
+            <div class="luxury-divider my-6 max-w-xs mx-auto">
+                <i class="fa-solid fa-gem text-gold text-sm mx-3 opacity-80"></i>
+            </div>
+
+            <p class="font-serif text-xl text-amber-100/90 tracking-widest uppercase mb-6">
+                Sabtu, 24 Oktober 2026
+            </p>
+
+            <p class="font-sans text-sm text-stone-300/80 tracking-wide">
+                Grand Ballroom The Royal Glasshouse, Jakarta
+            </p>
+
+            <div class="mt-12 flex justify-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-gold/60"></span>
+                <span class="w-2 h-2 rounded-full bg-gold/40"></span>
+                <span class="w-2 h-2 rounded-full bg-gold/60"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- PHONE VIEWPORT -->
+    <!-- ============================================================ -->
+    <div id="phone-viewport">
+
+    <!-- ============================================================ -->
+    <!-- 1. OPENING COVER - Modern Glassmorphism -->
+    <!-- ============================================================ -->
+    <section id="opening-cover" onclick="openInvitation()" 
+             class="fixed inset-0 z-[9999] flex items-center justify-center bg-emerald-dark text-white select-none cursor-pointer">
+        <div class="absolute inset-0 z-0 overflow-hidden">
+            <img src="assets/images/cover_bg.jpg" alt="Wedding Cover" class="w-full h-full object-cover object-center transform scale-105 filter brightness-50">
+            <div class="absolute inset-0 bg-gradient-to-t from-emerald-dark via-emerald-dark/70 to-emerald-dark/40"></div>
+            <div class="absolute inset-0 bg-floral-pattern opacity-20"></div>
+        </div>
+
+        <div id="floating-petals-container" class="absolute inset-0 pointer-events-none z-10 overflow-hidden"></div>
+
+        <!-- Cover Content - Glassmorphism -->
+        <div id="cover-content" class="relative z-20 max-w-sm w-full mx-4 text-center px-5 py-8 
+                                      bg-emerald-dark/70 backdrop-blur-xl rounded-3xl 
+                                      border border-gold/30 shadow-2xl
+                                      animate-scale-in">
+            <div class="inline-flex items-center justify-center mb-4">
+                <span class="text-xs font-sans tracking-[0.3em] text-gold uppercase font-semibold px-4 py-1.5 border-y border-gold/40">
+                    The Wedding Invitation
+                </span>
+            </div>
+
+            <h1 id="cover-couple-title" class="font-script text-4xl sm:text-5xl md:text-7xl text-gold-gradient my-3 tracking-wide leading-tight">
+                Isabella & Alexander
+            </h1>
+
+            <p id="cover-wedding-date" class="font-serif text-base sm:text-lg text-amber-100/90 tracking-widest uppercase mb-6">
+                Sabtu, 24 Oktober 2026
+            </p>
+
+            <div class="luxury-divider my-6">
+                <i class="fa-solid fa-gem text-gold text-sm mx-3 opacity-80"></i>
+            </div>
+
+            <div class="bg-emerald/60 p-4 rounded-2xl border border-gold/20 mb-6 max-w-md mx-auto backdrop-blur-sm">
+                <p class="text-xs font-sans text-stone-300 tracking-wider mb-1">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
+                <h2 id="cover-guest-name" class="font-serif font-bold text-xl sm:text-2xl text-white tracking-wide">
+                    Tamu Undangan
+                </h2>
+            </div>
+
+            <button id="btn-open-invitation" onclick="event.stopPropagation(); openInvitation();" 
+                    class="group btn-ripple px-8 py-3.5 rounded-full bg-gold-gradient text-emerald-dark 
+                           font-sans font-bold text-xs tracking-wider uppercase shadow-xl 
+                           hover:shadow-2xl hover:scale-105 transition-all duration-300 
+                           flex items-center justify-center gap-2 mx-auto cursor-pointer relative z-30">
+                <i class="fa-solid fa-envelope-open text-sm group-hover:animate-bounce"></i> 
+                <span>Buka Undangan</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- MAIN CONTENT -->
+    <!-- ============================================================ -->
+    <main id="main-content" class="relative z-10">
+
+        <!-- ============================================================ -->
+        <!-- 2. VIDEO INTRO - Cinematic Autoplay -->
+        <!-- ============================================================ -->
+        <section id="video-intro" class="relative w-full bg-black overflow-hidden" style="height: 100svh; min-height: 100vh;">
+            <!-- Video element -->
+            <video id="intro-video" 
+                   class="absolute inset-0 w-full h-full object-cover"
+                   src="assets/video/video.mp4"
+                   playsinline
+                   muted
+                   loop
+                   preload="auto">
+            </video>
+
+            <!-- Dark overlay gradient -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/70 z-10"></div>
+
+            <!-- Scroll down indicator + Skip -->
+            <div class="absolute bottom-8 left-0 right-0 z-20 flex flex-col items-center gap-4">
+                <button id="intro-skip-btn"
+                        onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'})"
+                        class="px-6 py-2.5 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-sm
+                               border border-white/30 text-white font-sans font-semibold text-xs
+                               uppercase tracking-wider transition-all duration-300 flex items-center gap-2
+                               hover:scale-105 shadow-lg">
+                    <i class="fa-solid fa-chevron-down text-xs animate-bounce"></i>
+                </button>
+            </div>
+            <!-- Gradient putih di bawah video menyambung ke quote -->
+            <div class="absolute bottom-0 left-0 right-0 z-30 pointer-events-none" style="height: 180px; background: linear-gradient(to bottom, transparent, #FAF7F2);"></div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- 3. HERO SECTION - Modern Minimalist -->
+        <!-- ============================================================ -->
+        <section id="hero" class="relative flex items-center justify-center py-16 overflow-hidden"
+                 style="background: linear-gradient(to bottom, #FAF7F2 0%, #F0EDE6 60%, #FAF7F2 100%);">
+
+            <div id="hero-content" class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 text-center">
+
+                <div class="glass-dark p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-gold/30 shadow-2xl max-w-2xl mx-auto mt-4 gsap-fade-up backdrop-blur-md">
+                    <i class="fa-solid fa-quote-left text-xl sm:text-2xl text-gold mb-3 block opacity-80"></i>
+                    <p id="quote-text" class="font-serif italic text-sm sm:text-lg leading-relaxed text-stone-200 mb-3">
+                        "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri..."
+                    </p>
+                    <span id="quote-source" class="font-sans text-xs tracking-widest text-gold uppercase font-bold">
+                        QS. Ar-Rum: 21
+                    </span>
+                </div>
+
+                <div class="mt-8 flex flex-col items-center gap-2 animate-bounce">
+                    <span class="text-xs font-sans tracking-widest uppercase text-gold">Scroll Down</span>
+                    <i class="fa-solid fa-chevron-down text-sm text-gold"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- 3. BRIDE & GROOM - Modern Cards -->
+        <!-- ============================================================ -->
+        <section id="couple" class="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden"
+                 style="background-image: url('assets/images/gif.gif'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+            <!-- Overlay agar teks tetap terbaca -->
+            <div class="absolute inset-0" style="background-color: rgba(250,247,242,0.55); z-index:0;"></div>
+
+            <div class="max-w-5xl mx-auto relative" style="z-index:1;">
+                <div class="text-center mb-10 sm:mb-16 gsap-fade-up">
+                    <span class="text-script text-2xl sm:text-3xl text-brown">Pasangan Mempelai</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-emerald mt-1">Mempelai Pria & Wanita</h2>
+                    <div class="w-24 h-0.5 bg-gold mx-auto mt-4"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-stretch">
+                    <!-- Groom -->
+                    <div class="group bg-white/40 backdrop-blur-sm p-6 sm:p-8 rounded-3xl border border-gold/30 shadow-xl 
+                                hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 text-center 
+                                flex flex-col items-center">
+                        <div class="relative w-36 h-48 sm:w-48 sm:h-64 rounded-2xl overflow-hidden border-2 border-gold shadow-lg mb-5">
+                            <img src="assets/images/couple_hero.jpg" alt="Alexander" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-emerald-dark/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                        <div class="flex-1 w-full">
+                            <span class="text-xs font-sans font-bold tracking-widest text-gold uppercase mb-1 block">Mempelai Pria</span>
+                            <div id="groom-name"></div>
+                            <div id="groom-parents"></div>
+                            <div id="groom-bio"></div>
+                        </div>
+                        <a id="groom-ig-btn" href="#" target="_blank" 
+                           class="mt-4 px-5 py-2.5 rounded-full bg-emerald text-gold font-sans font-semibold text-xs 
+                                  transition-all duration-300 hover:bg-emerald-dark shadow-lg hover:shadow-xl 
+                                  flex items-center gap-2 hover:scale-105">
+                            <i class="fa-brands fa-instagram"></i> @alexander.rayhan
+                        </a>
+                    </div>
+
+                    <!-- Bride -->
+                    <div class="group bg-white/40 backdrop-blur-sm p-6 sm:p-8 rounded-3xl border border-gold/30 shadow-xl 
+                                hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 text-center 
+                                flex flex-col items-center">
+                        <div class="relative w-36 h-48 sm:w-48 sm:h-64 rounded-2xl overflow-hidden border-2 border-gold shadow-lg mb-5">
+                            <img src="assets/images/cover_bg.jpg" alt="Isabella" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-emerald-dark/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                        <div class="flex-1 w-full">
+                            <span class="text-xs font-sans font-bold tracking-widest text-gold uppercase mb-1 block">Mempelai Wanita</span>
+                            <div id="bride-name"></div>
+                            <div id="bride-parents"></div>
+                            <div id="bride-bio"></div>
+                        </div>
+                        <a id="bride-ig-btn" href="#" target="_blank" 
+                           class="mt-4 px-5 py-2.5 rounded-full bg-emerald text-gold font-sans font-semibold text-xs 
+                                  transition-all duration-300 hover:bg-emerald-dark shadow-lg hover:shadow-xl 
+                                  flex items-center gap-2 hover:scale-105">
+                            <i class="fa-brands fa-instagram"></i> @isabella.aurelia
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- 4. COUNTDOWN - Modern Gradient -->
+        <!-- ============================================================ -->
+        <section id="countdown" class="py-16 sm:py-20 px-4 sm:px-6 bg-gradient-to-br from-emerald-dark via-emerald to-emerald-dark text-white relative">
+            <div class="absolute inset-0 bg-floral-pattern opacity-5"></div>
+            <div class="max-w-4xl mx-auto text-center relative z-10">
+                <span class="text-script text-2xl sm:text-3xl text-gold block mb-2">Hitung Mundur</span>
+                <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold mb-6 sm:mb-8">Menuju Hari Bahagia</h2>
+
+                <div class="grid grid-cols-4 gap-2 sm:gap-4 max-w-sm sm:max-w-2xl mx-auto mb-8 sm:mb-12">
+                    <div class="bg-white/10 backdrop-blur-sm p-3 sm:p-5 rounded-xl sm:rounded-2xl border border-gold/30 shadow-lg text-center 
+                                hover:bg-white/20 transition-all duration-300">
+                        <span id="cd-days" class="font-serif font-bold text-2xl sm:text-4xl md:text-5xl text-gold block leading-none">00</span>
+                        <span class="text-[0.6rem] sm:text-xs font-sans text-stone-300 tracking-wider uppercase mt-1 block">Hari</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm p-3 sm:p-5 rounded-xl sm:rounded-2xl border border-gold/30 shadow-lg text-center 
+                                hover:bg-white/20 transition-all duration-300">
+                        <span id="cd-hours" class="font-serif font-bold text-2xl sm:text-4xl md:text-5xl text-gold block leading-none">00</span>
+                        <span class="text-[0.6rem] sm:text-xs font-sans text-stone-300 tracking-wider uppercase mt-1 block">Jam</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm p-3 sm:p-5 rounded-xl sm:rounded-2xl border border-gold/30 shadow-lg text-center 
+                                hover:bg-white/20 transition-all duration-300">
+                        <span id="cd-minutes" class="font-serif font-bold text-2xl sm:text-4xl md:text-5xl text-gold block leading-none">00</span>
+                        <span class="text-[0.6rem] sm:text-xs font-sans text-stone-300 tracking-wider uppercase mt-1 block">Menit</span>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm p-3 sm:p-5 rounded-xl sm:rounded-2xl border border-gold/30 shadow-lg text-center 
+                                hover:bg-white/20 transition-all duration-300">
+                        <span id="cd-seconds" class="font-serif font-bold text-2xl sm:text-4xl md:text-5xl text-gold block leading-none">00</span>
+                        <span class="text-[0.6rem] sm:text-xs font-sans text-stone-300 tracking-wider uppercase mt-1 block">Detik</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4">
+                    <button onclick="window.Utils.openGoogleCalendar()" 
+                            class="px-6 py-3 rounded-full bg-emerald hover:bg-emerald-dark border border-gold/40 text-gold 
+                                   font-sans font-semibold text-xs uppercase tracking-wider transition-all duration-300 
+                                   shadow-md hover:shadow-xl flex items-center justify-center gap-2 hover:scale-105">
+                        <i class="fa-brands fa-google"></i> Google Calendar
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- 5. LOVE STORY - Modern Timeline -->
+        <!-- ============================================================ -->
+        <section id="story" class="py-16 sm:py-24 px-4 sm:px-6 bg-ivory relative">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-10 sm:mb-16 gsap-fade-up">
+                    <span class="text-script text-2xl sm:text-3xl text-brown">Kisah Cinta Kami</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-emerald mt-1">Love Story Timeline</h2>
+                    <div class="w-24 h-0.5 bg-gold mx-auto mt-4"></div>
+                </div>
+
+                <div class="relative">
+                    <div class="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-0.5 
+                                bg-gradient-to-b from-gold/20 via-gold to-gold/20 hidden md:block"></div>
+
+                    <div id="timeline-container"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- 6. GALLERY - Modern Marquee -->
+        <!-- ============================================================ -->
+        <section id="gallery" class="py-16 sm:py-24 px-4 sm:px-6 bg-cream relative">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-10 sm:mb-16 gsap-fade-up">
+                    <span class="text-script text-2xl sm:text-3xl text-brown">Galeri Momen Indah</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-emerald mt-1">Our Precious Moments</h2>
+                    <div class="w-24 h-0.5 bg-gold mx-auto mt-4"></div>
+                </div>
+
+                <div class="gallery-marquee" aria-label="Galeri foto pernikahan">
+                    <div id="gallery-grid-container" class="gallery-track"></div>
+                </div>
+                <p class="gallery-hint"><i class="fa-solid fa-hand-pointer"></i> Arahkan cursor ke foto untuk menghentikan galeri</p>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- 7. WEDDING VIDEO - Modern Minimalist -->
+        <!-- ============================================================ -->
+        <section id="video" class="py-16 sm:py-20 px-4 sm:px-6 bg-emerald-dark text-white relative">
+            <div class="absolute inset-0 bg-floral-pattern opacity-5"></div>
+            <div class="max-w-4xl mx-auto text-center relative z-10">
+                <span class="text-script text-2xl sm:text-3xl text-gold block mb-2">Video Teaser</span>
+                <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold mb-6 sm:mb-10">Cinematic Wedding Highlight</h2>
+
+                <div class="relative rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-gold/40 shadow-2xl aspect-video bg-black max-w-3xl mx-auto">
+                    <iframe id="wedding-video-iframe" class="w-full h-full" src="" 
+                            title="Wedding Highlight" frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- 8. WEDDING GIFT - Modern Accordion -->
+        <!-- ============================================================ -->
+        <section id="gift" class="py-16 sm:py-24 px-4 sm:px-6 bg-ivory relative">
+            <div class="max-w-3xl mx-auto text-center">
+                <span class="text-script text-2xl sm:text-3xl text-brown">Tanda Kasih</span>
+                <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-emerald mb-3 sm:mb-4">Wedding Gift & Amplop Digital</h2>
+                <p class="text-stone-600 font-sans text-xs sm:text-sm max-w-xl mx-auto mb-6 sm:mb-10 leading-relaxed">
+                    Doa restu Anda merupakan karunia terindah bagi kami. Namun jika Anda ingin memberikan hadiah, 
+                    kami menyediakan fitur amplop digital & alamat di bawah ini.
+                </p>
+
+                <details id="gift-details" class="gift-details bg-white rounded-3xl border border-gold/30 shadow-xl text-left">
+                    <summary class="gift-summary">
+                        <span class="gift-summary-icon"><i class="fa-solid fa-gift"></i></span>
+                        <span>
+                            <strong>Buka Tanda Kasih</strong>
+                            <small>Transfer bank, QRIS, atau kado fisik</small>
+                        </span>
+                        <i class="fa-solid fa-chevron-down gift-chevron" aria-hidden="true"></i>
+                    </summary>
+                    <div class="gift-content space-y-6">
+                    
+                        <!-- Bank Accounts -->
+                        <div class="space-y-4">
+                            <h4 class="font-serif font-bold text-xl text-emerald flex items-center gap-2 border-b border-gold/30 pb-2">
+                                <i class="fa-solid fa-building-columns text-gold"></i> Transfer Bank
+                            </h4>
+                            <div id="bank-accounts-container" class="space-y-4"></div>
+                        </div>
+
+                        <!-- QRIS -->
+                        <div class="border-t border-gold/30 pt-6">
+                            <h4 class="font-serif font-bold text-xl text-emerald flex items-center gap-2 mb-4">
+                                <i class="fa-solid fa-qrcode text-gold"></i> Pembayaran QRIS
+                            </h4>
+                            <div class="bg-ivory p-6 rounded-2xl border border-gold/30 text-center flex flex-col items-center">
+                                <img id="qris-image" src="" alt="QRIS Code" 
+                                     class="w-56 h-56 object-contain rounded-xl border border-stone-300 shadow-md mb-4 bg-white p-2">
+                                <p class="text-xs text-stone-600 font-sans">Scan kode QRIS menggunakan e-wallet atau mobile banking apapun.</p>
+                            </div>
+                        </div>
+
+                        <!-- Physical Gift -->
+                        <div class="border-t border-gold/30 pt-6">
+                            <h4 class="font-serif font-bold text-xl text-emerald flex items-center gap-2 mb-3">
+                                <i class="fa-solid fa-box-open text-gold"></i> Kirim Kado Fisik
+                            </h4>
+                            <div class="bg-ivory p-6 rounded-2xl border border-gold/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+                                <div>
+                                    <p id="gift-address-text" class="text-sm font-sans font-medium text-stone-800 mb-1"></p>
+                                    <p class="text-xs text-stone-500 font-sans">Penerima: Isabella & Alexander</p>
+                                </div>
+                                <button id="btn-copy-address" 
+                                        class="px-5 py-2.5 rounded-xl bg-emerald hover:bg-emerald-dark text-gold font-sans font-semibold text-xs transition-all duration-300 shadow-md flex items-center gap-2 flex-shrink-0 hover:scale-105">
+                                    <i class="fa-regular fa-copy"></i> Salin Alamat
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- 9. RSVP FORM - Modern Glassmorphism -->
+        <!-- ============================================================ -->
+        <section id="rsvp" class="py-16 sm:py-24 px-4 sm:px-6 bg-gradient-to-br from-emerald-dark via-emerald to-emerald-dark text-white relative">
+            <div class="absolute inset-0 bg-floral-pattern opacity-5"></div>
+            <div class="max-w-2xl mx-auto relative z-10">
+                <div class="text-center mb-8 sm:mb-12">
+                    <span class="text-script text-xl sm:text-2xl text-gold">Konfirmasi Kehadiran</span>
+                    <h2 class="font-serif text-2xl sm:text-3xl font-bold mt-1">RSVP & Ucapan</h2>
+                    <p class="text-stone-300 font-sans text-xs mt-3">Mohon konfirmasi kehadiran Anda untuk membantu kami menyiapkan acara terbaik.</p>
+                </div>
+
+                <div id="rsvp-already-submitted" class="hidden mb-6 bg-emerald border border-gold/40 text-gold px-4 py-3 rounded-2xl text-xs font-sans text-center">
+                    <i class="fa-solid fa-circle-check mr-2"></i> Anda telah mengisi konfirmasi kehadiran sebelumnya.
+                </div>
+
+                <form id="rsvp-form" class="bg-white/10 backdrop-blur-xl p-5 sm:p-7 rounded-2xl sm:rounded-3xl border border-gold/30 shadow-2xl space-y-4">
+                    <!-- Name -->
+                    <div>
+                        <label for="rsvp-name" class="block font-sans font-semibold text-xs text-gold uppercase tracking-wider mb-1.5">Nama Lengkap *</label>
+                        <input type="text" id="rsvp-name" required placeholder="Masukkan nama Anda" 
+                               class="w-full px-4 py-2.5 rounded-xl bg-emerald-dark/50 border border-gold/30 text-white placeholder-stone-400 
+                                      focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all font-sans text-xs">
+                        <span id="name-error" class="form-error hidden text-xs text-red-400 mt-1"></span>
+                    </div>
+
+                    <!-- Attendance -->
+                    <div>
+                        <label class="block font-sans font-semibold text-xs text-gold uppercase tracking-wider mb-1.5">Konfirmasi Kehadiran *</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <label class="flex items-center justify-center gap-2 p-3 rounded-xl bg-emerald-dark/50 border border-gold/30 cursor-pointer hover:border-gold transition-all">
+                                <input type="radio" name="attendance" value="Hadir" checked class="accent-gold">
+                                <span class="text-xs font-sans font-semibold text-stone-200">Hadir</span>
+                            </label>
+                            <label class="flex items-center justify-center gap-2 p-3 rounded-xl bg-emerald-dark/50 border border-gold/30 cursor-pointer hover:border-gold transition-all">
+                                <input type="radio" name="attendance" value="Tidak Hadir" class="accent-gold">
+                                <span class="text-xs font-sans font-semibold text-stone-200">Tidak Hadir</span>
+                            </label>
+                        </div>
+                        <span id="attendance-error" class="form-error hidden text-xs text-red-400 mt-1"></span>
+                    </div>
+
+                    <!-- Guest Count -->
+                    <div>
+                        <label for="rsvp-count" class="block font-sans font-semibold text-xs text-gold uppercase tracking-wider mb-1.5">Jumlah Tamu Hadir</label>
+                        <select id="rsvp-count" 
+                                class="w-full px-4 py-2.5 rounded-xl bg-emerald-dark/50 border border-gold/30 text-white 
+                                       focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all font-sans text-xs">
+                            <option value="1">1 Orang (Saya sendiri)</option>
+                            <option value="2">2 Orang (Bersama Pasangan)</option>
+                        </select>
+                    </div>
+
+                    <!-- Wishes -->
+                    <div>
+                        <label for="rsvp-wishes" class="block font-sans font-semibold text-xs text-gold uppercase tracking-wider mb-1.5">Ucapan & Doa Restu *</label>
+                        <textarea id="rsvp-wishes" rows="3" required placeholder="Tuliskan ucapan dan doa terbaik Anda..." 
+                                  class="w-full px-4 py-2.5 rounded-xl bg-emerald-dark/50 border border-gold/30 text-white placeholder-stone-400 
+                                         focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20 transition-all font-sans text-xs resize-none"></textarea>
+                        <span id="wishes-error" class="form-error hidden text-xs text-red-400 mt-1"></span>
+                    </div>
+
+                    <button type="submit" id="rsvp-submit-btn" 
+                            class="w-full py-3 rounded-xl bg-gold-gradient text-emerald-dark font-sans font-bold text-xs uppercase tracking-wider 
+                                   shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-paper-plane text-xs"></i> Kirim Konfirmasi RSVP
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- RSVP MODALS -->
+        <!-- Success -->
+        <div id="rsvp-success-modal" class="fixed inset-0 z-[10000] hidden items-center justify-center bg-black/80 backdrop-blur-md p-4 rsvp-modal">
+            <div class="bg-emerald border border-gold p-8 rounded-3xl max-w-md w-full text-center text-white shadow-2xl animate-scale-in">
+                <div class="w-16 h-16 rounded-full bg-gold-gradient text-emerald-dark flex items-center justify-center text-3xl mx-auto mb-4">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h3 class="font-serif font-bold text-2xl text-gold mb-2">Terima Kasih!</h3>
+                <p class="text-stone-200 font-sans text-sm mb-6 leading-relaxed">
+                    Konfirmasi kehadiran dan ucapan Anda telah berhasil kami terima. Kehadiran dan doa Anda sangat berarti bagi kami.
+                </p>
+                <button onclick="document.getElementById('rsvp-success-modal').classList.add('hidden')" 
+                        class="px-8 py-3 rounded-full bg-gold-gradient text-emerald-dark font-sans font-bold text-xs uppercase tracking-wider shadow-lg hover:scale-105 transition-all">
+                    Tutup
+                </button>
+            </div>
+        </div>
+
+        <!-- Error -->
+        <div id="rsvp-error-modal" class="fixed inset-0 z-[10000] hidden items-center justify-center bg-black/80 backdrop-blur-md p-4 rsvp-modal">
+            <div class="bg-red-950 border border-red-500 p-8 rounded-3xl max-w-md w-full text-center text-white shadow-2xl">
+                <div class="w-16 h-16 rounded-full bg-red-600 text-white flex items-center justify-center text-3xl mx-auto mb-4">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+                <h3 class="font-serif font-bold text-2xl text-red-200 mb-2">Gagal Mengirim</h3>
+                <p class="text-stone-200 font-sans text-sm mb-6 leading-relaxed">
+                    Terjadi kesalahan koneksi saat mengirim data. Silakan periksa koneksi internet Anda dan coba lagi.
+                </p>
+                <button onclick="document.getElementById('rsvp-error-modal').classList.add('hidden')" 
+                        class="px-8 py-3 rounded-full bg-red-600 text-white font-sans font-bold text-xs uppercase tracking-wider shadow-lg hover:scale-105 transition-all">
+                    Coba Lagi
+                </button>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- 10. GUEST WISHES - Modern Cards -->
+        <!-- ============================================================ -->
+        <section id="wishes" class="py-16 sm:py-24 px-4 sm:px-6 bg-ivory relative">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-10 sm:mb-16">
+                    <span class="text-script text-2xl sm:text-3xl text-brown">Buku Tamu & Doa Restu</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-emerald mt-1">Guest Wishes</h2>
+                    <div class="w-24 h-0.5 bg-gold mx-auto mt-4"></div>
+                </div>
+
+                <div id="wishes-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10"></div>
+
+                <div class="text-center">
+                    <button id="load-more-wishes-btn" 
+                            class="px-8 py-3 rounded-full border-2 border-emerald text-emerald font-sans font-bold text-xs uppercase tracking-wider 
+                                   hover:bg-emerald hover:text-gold transition-all duration-300 shadow hover:shadow-xl hover:scale-105">
+                        Muat Lebih Banyak Ucapan
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- 11. LOCATION - Modern Cards -->
+        <!-- ============================================================ -->
+        <section id="location" class="py-16 sm:py-24 px-4 sm:px-6 bg-cream relative">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-10 sm:mb-16">
+                    <span class="text-script text-2xl sm:text-3xl text-brown">Lokasi Acara</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-emerald mt-1">Wedding Location</h2>
+                    <div class="w-24 h-0.5 bg-gold mx-auto mt-4"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8 mb-8 sm:mb-12">
+                    <!-- Akad -->
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-gold/30 shadow-xl text-center hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+                        <span class="inline-block text-xs font-sans font-bold uppercase tracking-widest text-gold bg-emerald px-4 py-1.5 rounded-full mb-4">
+                            Akad Nikah
+                        </span>
+                        <h3 id="akad-venue" class="font-serif font-bold text-xl sm:text-2xl text-emerald mb-2"></h3>
+                        <p id="akad-time" class="text-stone-600 font-sans text-sm font-semibold mb-3 text-gold"></p>
+                        <p id="akad-address" class="text-stone-600 font-sans text-sm leading-relaxed mb-6"></p>
+                    </div>
+
+                    <!-- Resepsi -->
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-gold/30 shadow-xl text-center hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+                        <span class="inline-block text-xs font-sans font-bold uppercase tracking-widest text-gold bg-emerald px-4 py-1.5 rounded-full mb-4">
+                            Resepsi Pernikahan
+                        </span>
+                        <h3 id="resepsi-venue" class="font-serif font-bold text-xl sm:text-2xl text-emerald mb-2"></h3>
+                        <p id="resepsi-time" class="text-stone-600 font-sans text-sm font-semibold mb-3 text-gold"></p>
+                        <p id="resepsi-address" class="text-stone-600 font-sans text-sm leading-relaxed mb-6"></p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-3 sm:p-4 rounded-2xl sm:rounded-3xl border border-gold/30 shadow-2xl overflow-hidden mb-6 sm:mb-8">
+                    <iframe id="maps-iframe" class="w-full h-64 sm:h-96 rounded-xl sm:rounded-2xl" src="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+
+                <div class="text-center">
+                    <a id="btn-google-maps" href="#" target="_blank" 
+                       class="inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-emerald hover:bg-emerald-dark text-gold 
+                              font-sans font-bold text-xs uppercase tracking-wider transition-all duration-300 
+                              shadow-xl hover:shadow-2xl hover:scale-105 w-full sm:w-auto max-w-xs">
+                        <i class="fa-solid fa-diamond-turn-right text-base"></i> Buka Petunjuk Arah
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- 12. FOOTER - Modern Minimalist -->
+        <!-- ============================================================ -->
+        <footer id="footer" class="py-14 sm:py-20 px-4 sm:px-6 bg-emerald-dark text-white text-center border-t border-gold/30 relative">
+            <div class="absolute inset-0 bg-floral-pattern opacity-5"></div>
+            <div class="max-w-2xl mx-auto relative z-10">
+                <span class="text-script text-3xl sm:text-4xl text-gold block mb-3">Terima Kasih</span>
+                <p class="font-serif text-lg sm:text-xl md:text-2xl text-stone-200 mb-6 sm:mb-8 leading-relaxed px-2">
+                    Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.
+                </p>
+
+                <div class="luxury-divider max-w-sm mx-auto my-6">
+                    <i class="fa-solid fa-heart text-gold text-xs mx-3"></i>
+                </div>
+
+                <p id="footer-groom-family" class="font-sans text-xs text-stone-400 mb-1"></p>
+                <p id="footer-bride-family" class="font-sans text-xs text-stone-400 mb-8"></p>
+
+                <h3 class="font-script text-4xl sm:text-5xl text-gold-gradient mb-6 sm:mb-8">
+                    Isabella & Alexander
+                </h3>
+
+                <button onclick="scrollToTop()" 
+                        class="w-14 h-14 rounded-full bg-emerald text-gold border-2 border-gold/40 flex items-center justify-center mx-auto 
+                               hover:bg-gold-gradient hover:text-emerald-dark transition-all duration-300 shadow-lg hover:scale-110">
+                    <i class="fa-solid fa-arrow-up text-base"></i>
+                </button>
+            </div>
+        </footer>
+
+    </main>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- SCRIPTS -->
+    <!-- ============================================================ -->
+    <script src="data/config.js"></script>
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/audio.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <script src="assets/js/animations.js"></script>
+    <script src="assets/js/rsvp.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <script>
+        function scrollToTop() {
+            const mc = document.getElementById('main-content');
+            if (mc && window.innerWidth >= 1025) {
+                mc.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html>
